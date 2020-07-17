@@ -85,7 +85,8 @@ import org.osgi.service.component.annotations.Reference;
                 "before-filter=Auto Login Filter", "dispatcher=FORWARD",
                 "dispatcher=REQUEST", "servlet-context-name=",
                 "servlet-filter-name=SSO CAS Filter", "url-pattern=/c/portal/login",
-                "url-pattern=/c/portal/logout"
+                "url-pattern=/c/portal/logout",
+                "service.ranking:Integer=100"
         },
         service = Filter.class
 )
