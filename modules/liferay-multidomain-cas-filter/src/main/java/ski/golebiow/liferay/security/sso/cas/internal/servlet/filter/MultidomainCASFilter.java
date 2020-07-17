@@ -210,7 +210,7 @@ public class MultidomainCASFilter extends BaseFilter {
 
         if (Validator.isNotNull(login)) {
             processFilter(
-                    CASFilter.class.getName(), httpServletRequest,
+                    MultidomainCASFilter.class.getName(), httpServletRequest,
                     httpServletResponse, filterChain);
 
             return;
@@ -273,7 +273,7 @@ public class MultidomainCASFilter extends BaseFilter {
         }
 
         processFilter(
-                CASFilter.class.getName(), httpServletRequest, httpServletResponse,
+                MultidomainCASFilter.class.getName(), httpServletRequest, httpServletResponse,
                 filterChain);
     }
 
@@ -284,7 +284,7 @@ public class MultidomainCASFilter extends BaseFilter {
         _configurationProvider = configurationProvider;
     }
 
-    private static final Log _log = LogFactoryUtil.getLog(CASFilter.class);
+    private static final Log _log = LogFactoryUtil.getLog(MultidomainCASFilter.class);
 
     private static final Map<Long, TicketValidator> _ticketValidators =
             new ConcurrentHashMap<>();
