@@ -17,14 +17,11 @@ package ski.golebiow.liferay.security.sso.cas.internal.servlet.filter;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.LayoutSet;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.settings.CompanyServiceSettingsLocator;
-import com.liferay.portal.kernel.util.HashMapBuilder;
-import com.liferay.portal.kernel.util.Http;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.*;
 import com.liferay.portal.security.sso.cas.configuration.CASConfiguration;
 import com.liferay.portal.security.sso.cas.constants.CASConstants;
 import com.liferay.portal.security.sso.cas.internal.constants.CASWebKeys;
@@ -216,7 +213,13 @@ public class MultidomainCASFilter extends BaseFilter {
             return;
         }
 
-        String serverName = casConfiguration.serverName();
+        LayoutSet layoutSet =
+                (LayoutSet)httpServletRequest.getAttribute(WebKeys.VIRTUAL_HOST_LAYOUT_SET);
+
+        String serverName =
+                layoutSet.getVirtualHostnames().entrySet().stream().findFirst()
+                        .map(entry -> "https://" + entry.getKey() + "/")
+                        .orElse(casConfiguration.serverName());
 
         String serviceURL = casConfiguration.serviceURL();
 
