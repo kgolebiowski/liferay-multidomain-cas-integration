@@ -1,0 +1,3 @@
+Bundle-Name: liferay-multidomain-cas-filter
+Bundle-SymbolicName: ski.golebiow.liferay.security.sso.cas.internal.servlet.filter
+Bundle-Version: 1.0.0
